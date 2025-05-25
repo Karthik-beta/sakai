@@ -10,11 +10,12 @@ import { AppFloatingConfigurator } from '../../layout/component/app.floatingconf
 import { AuthService } from '../../services/auth-service/auth.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, AppFloatingConfigurator],
+    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, AppFloatingConfigurator, ToastModule],
     providers: [MessageService],
     template: `
         <app-floating-configurator />
