@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AppMenuitem } from './app.menuitem';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
     selector: 'app-menu',
@@ -18,138 +19,84 @@ import { AppMenuitem } from './app.menuitem';
 export class AppMenu {
     model: MenuItem[] = [];
 
+    constructor(public authService: AuthService) {}
+
     ngOnInit() {
         this.model = [
             {
-                label: 'Home',
-                items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }]
-            },
-            {
-                label: 'UI Components',
+                label: 'Dashboard',
                 items: [
-                    { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'] },
-                    { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
-                    { label: 'Button', icon: 'pi pi-fw pi-mobile', class: 'rotated-icon', routerLink: ['/uikit/button'] },
-                    { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
-                    { label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list'] },
-                    { label: 'Tree', icon: 'pi pi-fw pi-share-alt', routerLink: ['/uikit/tree'] },
-                    { label: 'Panel', icon: 'pi pi-fw pi-tablet', routerLink: ['/uikit/panel'] },
-                    { label: 'Overlay', icon: 'pi pi-fw pi-clone', routerLink: ['/uikit/overlay'] },
-                    { label: 'Media', icon: 'pi pi-fw pi-image', routerLink: ['/uikit/media'] },
-                    { label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/uikit/menu'] },
-                    { label: 'Message', icon: 'pi pi-fw pi-comment', routerLink: ['/uikit/message'] },
-                    { label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file'] },
-                    { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts'] },
-                    { label: 'Timeline', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/timeline'] },
-                    { label: 'Misc', icon: 'pi pi-fw pi-circle', routerLink: ['/uikit/misc'] }
+                    { label: 'Overview', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
                 ]
             },
             {
-                label: 'Pages',
-                icon: 'pi pi-fw pi-briefcase',
-                routerLink: ['/pages'],
+                label: 'Employee Management',
                 items: [
-                    {
-                        label: 'Landing',
-                        icon: 'pi pi-fw pi-globe',
-                        routerLink: ['/landing']
-                    },
-                    {
-                        label: 'Auth',
-                        icon: 'pi pi-fw pi-user',
-                        items: [
-                            {
-                                label: 'Login',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/login']
-                            },
-                            {
-                                label: 'Error',
-                                icon: 'pi pi-fw pi-times-circle',
-                                routerLink: ['/auth/error']
-                            },
-                            {
-                                label: 'Access Denied',
-                                icon: 'pi pi-fw pi-lock',
-                                routerLink: ['/auth/access']
-                            }
-                        ]
-                    },
-                    {
-                        label: 'Crud',
-                        icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud']
-                    },
-                    {
-                        label: 'Not Found',
-                        icon: 'pi pi-fw pi-exclamation-circle',
-                        routerLink: ['/pages/notfound']
-                    },
-                    {
-                        label: 'Empty',
-                        icon: 'pi pi-fw pi-circle-off',
-                        routerLink: ['/pages/empty']
-                    }
+                    { label: 'Employee Onboarding', icon: 'pi pi-fw pi-user-plus', routerLink: ['/attendance/onboarding'] }
                 ]
             },
             {
-                label: 'Hierarchy',
+                label: 'Attendance Management',
+                items: [
+                    { label: 'Daily Attendance', icon: 'pi pi-fw pi-clock', routerLink: ['/attendance/daily-info'] },
+                    { label: 'Monthly Summary', icon: 'pi pi-fw pi-calendar-times', routerLink: ['/attendance/monthly-info'] },
+                    { label: 'Device Logs', icon: 'pi pi-fw pi-server', routerLink: ['/attendance/device-logs'] }
+                ]
+            },
+            {
+                label: 'Attendance Regularization',
+                items: [
+                    { label: 'Missed Punched Management', icon: 'pi pi-fw pi-exclamation-triangle', routerLink: ['/attendance/regularization/missed-punches'] },
+                    { label: 'Holiday Management', icon: 'pi pi-fw pi-calendar', routerLink: ['/attendance/regularization/holidays'] },
+                    { label: 'Recalculate Attendance', icon: 'pi pi-fw pi-refresh', routerLink: ['/attendance/regularization/recalculate'] }
+                ]
+            },
+            {
+                label: 'Reports & Analytics',
                 items: [
                     {
-                        label: 'Submenu 1',
-                        icon: 'pi pi-fw pi-bookmark',
+                        label: 'Daily Reports', icon: 'pi pi-fw pi-chart-line',
                         items: [
-                            {
-                                label: 'Submenu 1.1',
-                                icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark' },
-                                    { label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark' },
-                                    { label: 'Submenu 1.1.3', icon: 'pi pi-fw pi-bookmark' }
-                                ]
-                            },
-                            {
-                                label: 'Submenu 1.2',
-                                icon: 'pi pi-fw pi-bookmark',
-                                items: [{ label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark' }]
-                            }
+                            { label: 'Mandays Report', icon: 'pi pi-fw pi-users', routerLink: ['/reports/daily/mandays'] },
+                            { label: 'Present Employees', icon: 'pi pi-fw pi-user', routerLink: ['/reports/daily/present'] },
+                            { label: 'Absent Employees', icon: 'pi pi-fw pi-user-minus', routerLink: ['/reports/daily/absent'] },
+                            { label: 'Late Arrivals', icon: 'pi pi-fw pi-clock', routerLink: ['/reports/daily/late-entry'] },
+                            { label: 'Early Departures', icon: 'pi pi-fw pi-sign-out', routerLink: ['/reports/daily/early-exit'] },
+                            { label: 'Overtime', icon: 'pi pi-fw pi-stopwatch', routerLink: ['/reports/daily/overtime'] },
+                            { label: 'Missed Punches', icon: 'pi pi-fw pi-ban', routerLink: ['/reports/daily/missed-punches'] },
+                            { label: 'Insufficient Hours', icon: 'pi pi-fw pi-hourglass', routerLink: ['/reports/daily/insufficient-hours'] }
                         ]
                     },
                     {
-                        label: 'Submenu 2',
-                        icon: 'pi pi-fw pi-bookmark',
+                        label: 'Monthly Reports', icon: 'pi pi-fw pi-calendar',
                         items: [
-                            {
-                                label: 'Submenu 2.1',
-                                icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-                                    { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' }
-                                ]
-                            },
-                            {
-                                label: 'Submenu 2.2',
-                                icon: 'pi pi-fw pi-bookmark',
-                                items: [{ label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' }]
-                            }
+                            { label: 'In - Out Summary', icon: 'pi pi-fw pi-calendar', routerLink: ['/reports/monthly/in-out'] },
+                            { label: 'In - Out Register', icon: 'pi pi-fw pi-arrows-h', routerLink: ['/reports/monthly/in-out-register'] },
+                            { label: 'Duty Hours Register', icon: 'pi pi-fw pi-clock', routerLink: ['/reports/monthly/duty-hours-register'] },
+                            { label: 'Muster Roll Register', icon: 'pi pi-fw pi-users', routerLink: ['/reports/monthly/muster-roll-register'] },
+                            { label: 'Payroll Output Register', icon: 'pi pi-fw pi-money-bill', routerLink: ['/reports/monthly/payroll-output-register'] },
+                            { label: 'Shift Roaster Register', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/reports/monthly/shift-roaster-register'] },
+                            { label: 'Overtime Register', icon: 'pi pi-fw pi-stopwatch', routerLink: ['/reports/monthly/overtime-register'] },
+                            { label: 'Late Arrivals Register', icon: 'pi pi-fw pi-arrow-right', routerLink: ['/reports/monthly/late-entry-register'] },
+                            { label: 'Early Departures Register', icon: 'pi pi-fw pi-arrow-left', routerLink: ['/reports/monthly/early-exit-register'] },
+                            { label: 'Absent Employees Register', icon: 'pi pi-fw pi-user-minus', routerLink: ['/reports/monthly/absent-register'] },
+                            { label: 'Present Employees Register', icon: 'pi pi-fw pi-user', routerLink: ['/reports/monthly/present-register'] }
                         ]
                     }
                 ]
             },
             {
-                label: 'Get Started',
+                label: 'System Configuration',
                 items: [
-                    {
-                        label: 'Documentation',
-                        icon: 'pi pi-fw pi-book',
-                        routerLink: ['/documentation']
-                    },
-                    {
-                        label: 'View Source',
-                        icon: 'pi pi-fw pi-github',
-                        url: 'https://github.com/primefaces/sakai-ng',
-                        target: '_blank'
-                    }
+                    { label: 'System Configuration', icon: 'pi pi-fw pi-cog', routerLink: ['/configuration'] },
+                    { label: 'Device Configuration', icon: 'pi pi-fw pi-server', routerLink: ['/device_config'] }
+                ]
+            },
+            {
+                label: 'User Account',
+                items: [
+                    { label: 'My Profile', icon: 'pi pi-fw pi-user-edit' },
+                    { label: 'Logout', icon: 'pi pi-fw pi-sign-out', styleClass: 'text-red-500 font-semibold hover:bg-red-50 hover:text-red-500 transition-colors', command: () => { this.authService.logout(); } }
                 ]
             }
         ];
