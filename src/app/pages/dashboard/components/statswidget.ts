@@ -115,7 +115,7 @@ export class StatsWidget implements OnInit {
                 this.earlyExitCount = data.today.total_early_exits;
                 this.present_count_last_hour = data.present_count_last_hour;
                 this.absent_percentage_increase = data.absent_percentage_increase;
-                this.frequent_late_arrivals = data.frequent_late_arrivals;
+                this.frequent_late_arrivals = data.frequent_late_arrivals || 0;
             });
     }
 }

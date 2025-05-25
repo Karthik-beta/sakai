@@ -32,7 +32,7 @@ export class AppMenu {
             {
                 label: 'Employee Management',
                 items: [
-                    { label: 'Employee Onboarding', icon: 'pi pi-fw pi-user-plus', routerLink: ['/attendance/onboarding'] }
+                    { label: 'Employee Onboarding', icon: 'pi pi-fw pi-user-plus', routerLink: ['/pages/employee-management/employee-onboarding'] }
                 ]
             },
             {
