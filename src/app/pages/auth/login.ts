@@ -54,6 +54,7 @@ import { MessageService } from 'primeng/api';
                 </div>
             </div>
         </div>
+        <p-toast></p-toast>
     `
 })
 export class Login {
